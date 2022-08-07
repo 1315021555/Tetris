@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小方块阵列</title>
+    <link rel="stylesheet" href="Teris.css">
+</head>
+<body>
+    <div class="container" id="container">
+   
+    </div>
+
+    <script> 
+    generateSquare();
+
+        //生成小方块阵列，并且给每个小方块设置移入移出事件
+        function generateSquare(){
+            const container = document.querySelector(".container");
+            for (let i=0;i<3000;i++){
+                const square=document.createElement("div"); //创建元素
+                square.className = 'square';            //设置class属性
+                container.appendChild(square);          //添加到container中
+            }
+        }
+       
+
+        //绑定事件 (事件委托)
+        container.onmouseover = function(e){
+            let target = e.target;
+            if (target.className == 'square'){
+                setColor(target);
+               //console.log("1");
+            }
+
+        }
+
+        container.onmouseout = function(e){
+            let target = e.target;
+            if (target.className == 'square'){
+                deleteColor(target);
+             //  console.log("1");
+            }
+
+        }
+
+
+        //设置小方块颜色
+        function setColor(element){
+            element.style.backgroundColor =`rgb(${getNumber()},${getNumber()},${getNumber()})`
+            //获取0-255的随机整数
+            //console.log(Math.floor(Math.random()*256));
+            function getNumber(){
+                return Math.floor(Math.random()*256)
+            }
+        }
+
+        //恢复小方块颜色
+        function deleteColor(element){
+            element.style.backgroundColor = '';
+        }
+    </script>
+</body>
+</html>
